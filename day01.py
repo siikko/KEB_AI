@@ -1,20 +1,17 @@
-import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
 
+ls=pd.read_csv("https://github.com/ageron/data/raw/main/lifesat/lifesat.csv")
+X=ls[["GDP per capita (USD)"]].values
+y=ls[["Life satisfaction"]].values
+print(ls)
+ls.plot(kind='scatter',grid=True,x="GDP per capita (USD)",
+        y="Life satisfaction")#산점도를 그리겠다, 격자는 있어야하고 x와 y축은 해당 값들이 있어야 함.
+plt.axis([23500,62500,4,9])#Matplotlib에서 그래프의 x축, y축의 범위를 설정하거나 숨기는 기능
+plt.show()
 
-#dataframe은 2차원의 표형태,serial은 1차원형태(예를들어, 열)
-df = pd.DataFrame(
-{"a" : [4, 5, 6],
-      "b" : [7, 8, 9],
-      "c" : [10, 11, 12]},
-      index = [1, 2, 3]) #index:row명, dict의 key:column명
-print(df)
-
-print('------------------------------')#위의 df와 아래의 df는 차이점은 데이터가 열로 쭉들어가냐, 행으로 쭉 들어가냐의 차이점이다.
-df_=pd.DataFrame(
-      [[4,7,10],
-       [5,8,11],
-       [6,9,12]],index=[1,2,3],columns=['a','b','c']
-)
-print(df_.melt) #melt:데이터프레임을 길게 아래로 변환하는 함수
-#iloc:index기준 loc, loc:lable기준 loc
+model=LinearRegression()
+model.fit(X,y)
+X_new=[[37655.2]]
+print(model.predict(X_new))
