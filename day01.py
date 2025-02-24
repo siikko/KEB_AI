@@ -11,7 +11,7 @@ ls.plot(kind='scatter',grid=True,x="GDP per capita (USD)",
 plt.axis([23500,62500,4,9])#Matplotlib에서 그래프의 x축, y축의 범위를 설정하거나 숨기는 기능
 plt.show()
 
-model=se.LinearRegression()
+model=se.KNeighborsRegressor()
 
 model.fit(X,y)
 X_new=[[37655.2]]
