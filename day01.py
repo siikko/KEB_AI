@@ -1,8 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-# from sklearn.linear_model import LinearRegression
-from sklearn.neighbors import  KNeighborsRegressor
-
+import SElearn as se
 
 ls=pd.read_csv("https://github.com/ageron/data/raw/main/lifesat/lifesat.csv")
 X=ls[["GDP per capita (USD)"]].values
@@ -13,8 +11,9 @@ ls.plot(kind='scatter',grid=True,x="GDP per capita (USD)",
 plt.axis([23500,62500,4,9])#Matplotlib에서 그래프의 x축, y축의 범위를 설정하거나 숨기는 기능
 plt.show()
 
-# model=LinearRegression()
-model=KNeighborsRegressor(n_neighbors=3)
+model=se.LinearRegression()
+
 model.fit(X,y)
 X_new=[[37655.2]]
 print(model.predict(X_new))
+
