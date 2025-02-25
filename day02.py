@@ -1,21 +1,24 @@
-#결측치값을 산술평균으로 채워 넣기
+#나이(X)에 따른 생존률 (y)
+import seaborn as sns
 import numpy as np
 import pandas as pd
-from sklearn.impute import SimpleImputer
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
 
-df=pd.DataFrame({
 
-    'A':[1,2,np.nan,4],
-    'B':[np.nan,12,3,4],
-    'C':[1,2,3,4]
-})
-print(df)
+titanic=sns.load_dataset('titanic')
+print(type(titanic)) #<class 'pandas.core.frame.DataFrame'>
+print(titanic.info())
+print(titanic.head())
+titanic = titanic.dropna(subset=["age"])
+x_train=titanic[["age"]].values #x_train데이터 추출
+y_train=titanic["survived"].values #y_train데이터 추출
 
-df_option=df.copy()
-mean_value=df_option.mean()
-df_option.fillna(mean_value,inplace=True)
-print(df_option)
+titanic.plot(kind='scatter',grid=True,x="age",
+        y="survived")
+plt.show()
 
-# i=SimpleImputer(strategy='mean')
-# df[['A','B']]=i.fit_transform(df[['A','B']])
-# print(df)
+model=KNeighborsClassifier()
+model.fit(x_train,y_train)
+x_test=np.array([[25]])
+print(model.predict(x_test))
