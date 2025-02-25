@@ -11,11 +11,11 @@ df=pd.DataFrame({
 })
 print(df)
 
-# df_option=df.copy()
-# mean_value=df_option.mean()
-# df_option.fillna(mean_value,inplace=True)
-# print(df)
+df_option=df.copy()
+mean_value=df_option.mean()
+df_option.fillna(mean_value,inplace=True)
+print(df_option)
 
-i=SimpleImputer(strategy='mean')
-df[['A','B']]=i.fit_transform(df[['A','B']])
-print(df)
+# i=SimpleImputer(strategy='mean')
+# df[['A','B']]=i.fit_transform(df[['A','B']])
+# print(df)
